@@ -1,11 +1,10 @@
 # 🚀 Lab365 Fullstack Trindade - Node Express Rest API with Typescript and Sequelize
 
-###
+### API Docs
 
-DEMO: https://lab-365-fullstack-node-api-production.up.railway.app/
-API: https://lab-365-fullstack-node-api-production.up.railway.app/api/
+https://lab-365-fullstack-node-api-production.up.railway.app/api/
 
-### Setup
+### Setup Project
 
 ```bash
 $ npm install
