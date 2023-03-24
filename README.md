@@ -10,7 +10,7 @@ https://lab-365-fullstack-node-api-production.up.railway.app/api/
 $ npm install
 ```
 
-### Run local
+### Run locally
 
 ```bash
 $ npm run serve
@@ -18,7 +18,7 @@ $ npm run serve
 
 ### Setup Database
 
-> Install MySQL locally and create a database and then update database information into connection.ts file like this;
+> Install MySQL locally and create a database and then update database information into db/connection.ts file like this;
 
 ```ts
 export const sequelize = new Sequelize("node-ts-db", "root", "password", {
