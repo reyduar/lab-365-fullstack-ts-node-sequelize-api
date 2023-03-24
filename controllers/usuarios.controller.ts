@@ -51,10 +51,22 @@ export const updateUsuario = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteUsuario = (req: Request, res: Response) => {
+export const deleteUsuario = async (req: Request, res: Response) => {
   const { id } = req.params;
-  res.json({
-    message: "deleteUsuario",
-    id,
-  });
+  try {
+    const usuarioDeleted = await Usuario.destroy({ where: { id } });
+    if (usuarioDeleted) {
+      res.status(201).json({
+        message: "Usuário deletado com sucesso",
+        usuario: usuarioDeleted,
+      });
+    } else {
+      res.status(404).json({ mensaje: "usuário não encontrado" });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Error ao deletar usuário",
+      error,
+    });
+  }
 };
