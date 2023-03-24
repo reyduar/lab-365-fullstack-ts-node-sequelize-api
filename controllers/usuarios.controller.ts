@@ -29,13 +29,26 @@ export const createUsuario = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUsuario = (req: Request, res: Response) => {
+export const updateUsuario = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { body } = req;
-  res.json({
-    message: "putUsuario",
-    body,
-  });
+  const { nome, email, senha } = req.body;
+  try {
+    const usuarioUpdated = await Usuario.findByPk(id);
+    if (usuarioUpdated) {
+      await Usuario.update({ nome, email, senha }, { where: { id } });
+      res.status(201).json({
+        message: "Usuário atualizado com sucesso",
+        usuario: usuarioUpdated,
+      });
+    } else {
+      res.status(404).json({ mensaje: "usuário não encontrado" });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Error ao atualizar usuário",
+      error,
+    });
+  }
 };
 
 export const deleteUsuario = (req: Request, res: Response) => {
