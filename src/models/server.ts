@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import cors from "cors";
-import { sequelize } from "./db/connection";
-import usuarioRoutes from "./routes/usuarios.route";
+import { sequelize } from "../db/connection";
+import usuarioRoutes from "../routes/usuarios.route";
 
 export interface Path {
   usuarios: string;

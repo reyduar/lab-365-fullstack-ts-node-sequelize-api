@@ -46,3 +46,7 @@ Usuario.init(
   await sequelize.sync();
   console.log("Create usuarios table if does not exist!");
 })();
+
+// (async () => {
+//   await await Equipamento.create({ ...dados });
+// })();

@@ -1,17 +1,46 @@
 import { Response, Request } from "express";
 import { Usuario } from "../models/usuarios";
-export const getUsuarios = (req: Request, res: Response) => {
-  res.json({
-    message: "getUsuarios",
-  });
+export const getUsuarios = async (req: Request, res: Response) => {
+  try {
+    const usuarios = await Usuario.findAll({
+      // where: {
+      //   age: { [Op.gte]: 18 } // exemplo pra fazer where
+      // },
+      order: [["id", "DESC"]],
+    });
+    if (usuarios) {
+      res.status(200).json({
+        usuarios,
+      });
+    } else {
+      res.status(404).json({ mensaje: "Usuários não encontrados" });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Error ao procurar usuários",
+      error,
+    });
+  }
 };
 
-export const getUsuario = (req: Request, res: Response) => {
+export const getUsuario = async (req: Request, res: Response) => {
   const { id } = req.params;
-  res.json({
-    message: "getUsuario",
-    id,
-  });
+  try {
+    const usuario = await Usuario.findByPk(id);
+    if (usuario) {
+      res.status(201).json({
+        message: "Usuário encontrado com sucesso",
+        usuario,
+      });
+    } else {
+      res.status(404).json({ mensaje: "usuário não encontrado" });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Error ao atualizar usuário",
+      error,
+    });
+  }
 };
 
 export const createUsuario = async (req: Request, res: Response) => {
